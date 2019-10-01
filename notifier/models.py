@@ -21,7 +21,7 @@ class Notification(models.Model):
         (EMAIL_NOTI, 'Email only notification'),
     )
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True, related_name='notifications')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True, related_name='notifications', on_delete=models.CASCADE)
     noti_type = models.PositiveSmallIntegerField(choices=NOTIFICATION_TYPE_CHOICES, default=ALL_TYPE_NOTI)
     creation_dt = models.DateTimeField(auto_now_add=True)
     displayed = models.BooleanField(default=False)
