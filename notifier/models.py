@@ -5,7 +5,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.template.loader import render_to_string
 from django.template import TemplateDoesNotExist
 from django.utils import translation
-from six.moves.html_parser import HTMLParser
+from six.moves import html_parser
 
 from model_utils.managers import InheritanceManager
 
@@ -170,9 +170,8 @@ class NotificationMixin(object):
         """
         # Convert the html back to plaintext after rendering it using template
         # to get rid of html ampersand character codes
-        parser = HTMLParser()
         html_email = self._get_email_field('email_subject_tmpl', 'get_email_subject')
-        return parser.unescape(html_email)
+        return html_parser.unescape(html_email)
 
     def get_email_plaintext_body(self):
         """
@@ -184,9 +183,8 @@ class NotificationMixin(object):
         """
         # Convert the html back to plaintext after rendering it using template
         # to get rid of html ampersand character codes
-        parser = HTMLParser()
         html_email = self._get_email_field('email_plaintext_body_tmpl', 'get_email_plaintext_body')
-        return parser.unescape(html_email)
+        return html_parser.unescape(html_email)
 
     def get_email_html_body(self):
         """
